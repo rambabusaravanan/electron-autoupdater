@@ -1,0 +1,1 @@
+aws s3 sync dist/win/ s3://releases.rambabusaravanan.com/win/ --region ap-south-1
