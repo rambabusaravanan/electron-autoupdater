@@ -6,15 +6,19 @@
   "scripts": {
     "start": "electron .",
     "build": "build --win",
+    "build:publish": "build --win -p always",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
-    "squirrelWindows": {
-      "remoteReleases": "http://releases.rambabusaravanan.com/win/"
-    },
-    "win": {
-      "certificateFile": "./certs/my_signing_key.pfx",
-      "certificatePassword": ""
+    "artifactName": "${productName}-${version}.${ext}",
+    "publish": [
+      {
+        "provider": "s3",
+        "bucket": "releases.rambabusaravanan.com"
+      }
+    ],
+    "nsis": {
+      "perMachine": true
     }
   },
   "repository": {
@@ -33,7 +37,12 @@
   },
   "homepage": "https://github.com/vojtatranta/electron-windows-autoupdate#readme",
   "devDependencies": {
-    "electron": "^1.4.3",
-    "electron-builder": "^7.14.1"
+    "electron": "^1.7.5",
+    "electron-builder": "^19.24.1",
+    "electron-publisher-s3": "^19.24.0"
+  },
+  "dependencies": {
+    "electron-log": "^2.2.7",
+    "electron-updater": "^2.8.7"
   }
 }
